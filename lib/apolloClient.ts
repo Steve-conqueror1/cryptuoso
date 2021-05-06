@@ -1,19 +1,10 @@
-import { InMemoryCache ,ApolloClient, HttpLink, from } from "@apollo/client";
-import {onError} from '@apollo/client/link/error';
+import { InMemoryCache, ApolloClient } from "@apollo/client";
 
-
-const cache = new InMemoryCache()
-
-
-
-
-const link = from([ 
-     new HttpLink({uri: "https://hasura.dev.cryptuoso.com/v1/graphql"})
-    ])
+const uri = "https://hasura.dev.cryptuoso.com/v1/graphql";
+const cache = new InMemoryCache();
 
 export const client = new ApolloClient({
-    link,
-    cache  
+    uri, cache  
 });
 
 

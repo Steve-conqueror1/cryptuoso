@@ -4,47 +4,49 @@ import robotsStyles from './../styles/Robots.module.scss';
 import Link from "next/link";
 import { LOAD_ROBOTS } from './../lib/queries/getAllRobots';
 import { gql, useQuery} from '@apollo/client';
+import {client} from './../lib/apolloClient'
 
 
 
 
 
-// export const getStaticProps = async () => {
-//     const { data, error, loading } = await client.query({
-//       query: gql`
-//         query Robots {
-//           robots(limit:10) {
-//             id
-//             code            
-//           }
-//         }
-//       `,
-//     });
+export const getStaticProps = async () => {
+    const { data, error, loading } = await client.query({
+      query: gql`
+        query Robots {
+          robots(limit:10) {
+            id
+            code            
+          }
+        }
+      `,
+    });
 
-//     return {
-//       props: {        
-//         data:data
-//       },
-//    };
-// }
-
-
+    return {
+      props: {        
+        data:data
+      },
+   };
+}
 
 
 
-const RobotsList = () => {   
 
-   const {error, loading, data} = useQuery(LOAD_ROBOTS);
-   console.log("data....", data)
 
-   
+const RobotsList = ({data}) => {   
+
+
+    const {robots} = data;
+  
     const handleOnClick = () => {
          
     }
 
-    useEffect(() => {
-        console.log("data....", data)
-    }, [data])
+    // useEffect(() => {
+    //     console.log("data....", data)
+    // }, [data])
+
+
 
 
 
@@ -54,7 +56,7 @@ const RobotsList = () => {
                 <title>Robots List</title>
             </PageHeader>           
             <h2 className={robotsStyles.header}>View Our Trading</h2>
-            {/* <div  className={robotsStyles.grid} >
+            <div  className={robotsStyles.grid} >
             {
                 robots.map((robot, index) => {
                     const urlPath = `/robots/robot/${robot.id}`
@@ -79,7 +81,7 @@ const RobotsList = () => {
                         )
                 })
             }           
-            </div> */}
+            </div>
             <div onClick={handleOnClick} className={robotsStyles.pagination}>
                 <div>Load more &#8594;</div>                
             </div>
