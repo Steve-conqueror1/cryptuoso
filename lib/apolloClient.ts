@@ -20,8 +20,7 @@ const link = from([
 
 export const client = new ApolloClient({
     link,
-    cache
-  
+    cache  
 });
 
 
