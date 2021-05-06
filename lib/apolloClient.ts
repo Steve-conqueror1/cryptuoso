@@ -4,17 +4,10 @@ import {onError} from '@apollo/client/link/error';
 
 const cache = new InMemoryCache()
 
-const errorLink = onError(({graphqlErrors, networkError}) => {
-    if(graphqlErrors){
-        graphqlErrors.map(({message, location, path}) => {
-            alert(`Graphql error ${message}`)
-        })
-    }
-})
 
 
-const link = from([
-    errorLink,
+
+const link = from([ 
      new HttpLink({uri: "https://hasura.dev.cryptuoso.com/v1/graphql"})
     ])
 
