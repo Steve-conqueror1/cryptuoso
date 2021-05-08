@@ -2,8 +2,9 @@ import Layout from "../components/shared/Layout";
 import { createApolloClient } from "./../lib/apolloClient";
 import { ApolloProvider } from "@apollo/client";
 import "../styles/globals.css";
+import { ReactNode } from "react";
 
-function MyApp({ Component, pageProps }) {
+const MyApp = ({ Component, pageProps }) => {
     const client = createApolloClient();
 
     return (
@@ -13,6 +14,6 @@ function MyApp({ Component, pageProps }) {
             </Layout>
         </ApolloProvider>
     );
-}
+};
 
 export default MyApp;

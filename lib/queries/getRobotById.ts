@@ -1,8 +1,7 @@
-import { gql } from '@apollo/client';
- 
-export const getRobot = (id: string) => {
+import { gql } from "@apollo/client";
 
-    const ROBOT_QUERY =   gql`
+export const getRobot = (id: string) => {
+    const ROBOT_QUERY = gql`
     query Robots {
       robots_by_pk(id: "${id}") {
           id
@@ -13,9 +12,6 @@ export const getRobot = (id: string) => {
       }
     }
   `;
-  
-  return ROBOT_QUERY
-}
 
-   
- 
+    return ROBOT_QUERY;
+};

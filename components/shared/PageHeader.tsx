@@ -1,9 +1,5 @@
-import Head from 'next/head'
+import Head from "next/head";
 
-export const PageHeader:React.FC = (props) => {
-    const {children} = props
-    return   <Head>
-
-        {children}        
-    </Head>
-}
+export const PageHeader: React.FC = ({ children }) => {
+    return <Head>{children}</Head>;
+};

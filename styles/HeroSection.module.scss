@@ -1,7 +1,8 @@
-$color-green:rgba(85, 239, 196,1.0);
+$color-green: rgba(85, 239, 196, 1);
 
-.hero{
-    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("./../public/hero.jpg");
+.hero {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+        url("./../public/hero.jpg");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -11,48 +12,46 @@ $color-green:rgba(85, 239, 196,1.0);
     margin-top: -9rem;
 
     & .header {
-        color:#fff;
+        color: #fff;
         font-size: 2.8rem;
         text-transform: uppercase;
         text-align: center;
-      } 
+    }
 
     & a {
         color: $color-green;
         font-size: 2rem;
         display: flex;
         justify-content: center;
-        transition: all .2s;
+        transition: all 0.2s;
 
-        &:hover{
+        &:hover {
             color: rgb(78, 131, 116);
         }
-    }  
-    
+    }
+
     & .home {
-        color:#fff;
+        color: #fff;
         font-size: 1.2rem;
         text-align: center;
         line-height: 2rem;
     }
 }
 
-
 @media only screen and (max-width: 600px) {
     .hero {
-        & .header {            
-            font-size: 2rem
-          } 
+        & .header {
+            font-size: 2rem;
+        }
 
-          & .home {
+        & .home {
             font-size: 1rem;
             text-align: center;
             line-height: 1.6rem;
         }
 
-        & a {            
+        & a {
             font-size: 1.6rem;
-        } 
+        }
     }
-    
 }

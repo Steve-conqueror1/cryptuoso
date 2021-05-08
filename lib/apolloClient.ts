@@ -4,8 +4,8 @@ const uri = "https://hasura.dev.cryptuoso.com/v1/graphql";
 const cache = new InMemoryCache();
 
 export const createApolloClient = () => {
-    return new ApolloClient({ 
+    return new ApolloClient({
         uri,
-        cache        
+        cache
     });
-}
+};
