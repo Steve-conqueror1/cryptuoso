@@ -1,6 +1,5 @@
 $color-green:rgba(85, 239, 196,1.0);
 
-
 .hero{
     background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("./../public/hero.jpg");
     background-position: center;
@@ -28,14 +27,32 @@ $color-green:rgba(85, 239, 196,1.0);
         &:hover{
             color: rgb(78, 131, 116);
         }
-    }   
+    }  
+    
+    & .home {
+        color:#fff;
+        font-size: 1.2rem;
+        text-align: center;
+        line-height: 2rem;
+    }
 }
 
- 
 
-.home {
-    color:#fff;
-    font-size: 1.2rem;
-    text-align: center;
-    line-height: 2rem;
+@media only screen and (max-width: 600px) {
+    .hero {
+        & .header {            
+            font-size: 2rem
+          } 
+
+          & .home {
+            font-size: 1rem;
+            text-align: center;
+            line-height: 1.6rem;
+        }
+
+        & a {            
+            font-size: 1.6rem;
+        } 
+    }
+    
 }

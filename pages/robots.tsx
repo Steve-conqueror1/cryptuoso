@@ -1,27 +1,15 @@
 import {PageHeader} from '../components/shared/PageHeader';
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import robotsStyles from './../styles/Robots.module.scss';
 import Link from "next/link";
-import {getQuery}  from './../lib/queries/getAllRobots';
-
-import {createApolloClient} from './../lib/apolloClient'
-
-
-import { gql } from "@apollo/client";
+import {createApolloClient} from './../lib/apolloClient';
+import {LOAD_ROBOTS} from './../lib/queries/getAllRobots';
 
 
 export const getServerSideProps = async () => {
    const client = createApolloClient();
-
     const result = await client.query({
-      query: gql`
-        query Robots {
-          robots {
-            id
-            code            
-          }
-        }
-      `,
+      query: LOAD_ROBOTS
     });
 
     return {
@@ -32,29 +20,21 @@ export const getServerSideProps = async () => {
 }
 
 
-const RobotsList = ({result}) => {  
-
-    const {error, data, loading} = result;
-    
-   const { robots } = data
-   
-  
-
+const RobotsList = ({result}) => { 
+    const {data} = result;    
+   const { robots } = data;
  
-    const [numberOfRobots, setNumberOfRobots] = useState(10)
-
+    const [numberOfRobots, setNumberOfRobots] = useState(10);
    
     const handleFetchNext = () => {
         setNumberOfRobots(numberOfRobots+10)
     }
 
     const handleFetchPrevious = () => {
-        setNumberOfRobots(numberOfRobots-10)
+        setNumberOfRobots(numberOfRobots-10);
     }
 
-    const dataLength = robots.length;
-   
-
+    const dataLength = robots.length;  
 
     return (    
         <>
@@ -96,8 +76,6 @@ const RobotsList = ({result}) => {
             </>
     )
 }
-
-
 
 export default RobotsList;
 

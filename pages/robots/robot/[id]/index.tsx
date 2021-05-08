@@ -1,30 +1,17 @@
-import { gql } from "@apollo/client";
-import {useRouter} from 'next/router';
 import { useEffect, useState } from "react";
 import {createApolloClient} from '../../../../lib/apolloClient';
 import {PageHeader} from './../../../../components/shared/PageHeader';
 import robotStyles from './../../../../styles/Robot.module.scss';
 import {Input} from './../../../../components/Input';
-
+import {getRobot} from './../../../../lib/queries/getRobotById';
 
 
 export const getServerSideProps = async (context) => {
-    const client = createApolloClient();   
-
+    const client = createApolloClient();
     const id = context.params.id; 
 
     const result = await client.query({
-        query: gql`
-          query Robots {
-            robots_by_pk(id: "${id}") {
-                id
-                name
-                robot_settings {
-                robot_settings
-                }           
-            }
-          }
-        `,
+        query: getRobot(id)     
       });  
 
     return {
@@ -34,28 +21,17 @@ export const getServerSideProps = async (context) => {
    };
 }
 
-
-
-
-const Robot = ({result}) => {
-    const router = useRouter();  
-
-
-    const {error, loading, data} = result;
-    
+const Robot = ({result}) => {  
+    const {data} = result;    
     const {id, name, robot_settings} = data.robots_by_pk;
-
     const [settingsChange, setSettingsChange] = useState(false);
-
-    const SettingsObj = robot_settings.robot_settings;
-   
+    const SettingsObj = robot_settings.robot_settings;   
 
     useEffect(() => {   
         return () => {
             setSettingsChange(false); 
         }
-    }, [settingsChange])
-    
+    }, [settingsChange])    
    
     const handleChange = (e) => {
         const objKey =  e.target['id'];
@@ -66,21 +42,19 @@ const Robot = ({result}) => {
     const settings = Object.entries(SettingsObj); 
     const robotSetting = settings.map((setting, index) => {
         return (
-            <>
+            <div key={index}>
                 <span className={robotStyles.part}>{setting[0]}:</span> {setting[1]}<br/>  
-            </>  
+            </div>  
         )                     
-    })
-   
+    })   
 
     const formFields = settings.map((setting, index) => {
         return (
-            <>
+            <div key={index}>
                 <span className={robotStyles.grid}> <span className={robotStyles.part}>{setting[0]}: </span> <Input id={setting[0]} onChange={handleChange} /> </span><br/>  
-            </>  
+            </div>    
         )                     
-    })
-    
+    })    
    
     return (
         <>
@@ -104,6 +78,5 @@ const Robot = ({result}) => {
          </>
          )
 }
-
 
 export default Robot;

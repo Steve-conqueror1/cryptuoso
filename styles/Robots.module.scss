@@ -113,3 +113,46 @@ $color-green:rgba(85, 239, 196,1.0);
    
   }
 
+
+  @media only screen and (max-width: 800px) {
+    .grid {  
+        display: flex;    
+        flex-direction: column;
+        margin-top: 2rem;
+      }
+
+      .pagination{      
+        display: flex;    
+        margin: 1.2rem 0;
+        justify-content: center; 
+  
+        div{
+          margin-right: 1.2rem;
+          font-size: 1rem;        
+          transition: all .2s;
+          padding: .6rem 1.4rem;  
+  
+          &:hover{
+              cursor: pointer;
+              color: $color-white;
+              background-color: $color-green;
+          }
+        }
+
+        .card { 
+            padding: 1rem; 
+            text-decoration: none;
+            border: 2px solid #d4d2d2;
+            border-radius: 5px;  
+            font-size: 1rem;   
+            transition: all 2s;
+        }
+     
+    }    
+}
+
+
+
+@media only screen and (max-width: 800px) {
+   
+}

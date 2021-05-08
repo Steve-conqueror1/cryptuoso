@@ -1,14 +1,21 @@
 import { gql } from '@apollo/client';
+ 
+export const getRobot = (id: string) => {
 
-export const getQuery = () => {
-  const LOAD_ROBOTS= gql`
-    query GetRobots {
-      robots(limit:10) {
-        id
-        code      
+    const ROBOT_QUERY =   gql`
+    query Robots {
+      robots_by_pk(id: "${id}") {
+          id
+          name
+          robot_settings {
+          robot_settings
+          }           
       }
     }
   `;
-   
-  return LOAD_ROBOTS;
+  
+  return ROBOT_QUERY
 }
+
+   
+ 

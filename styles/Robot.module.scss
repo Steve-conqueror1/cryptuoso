@@ -88,3 +88,13 @@ $color-green:rgba(85, 239, 196,1.0);
           }
       }
   }
+
+
+
+  @media only screen and (max-width: 800px) {
+    .grid {  
+        display: flex;  
+        flex-direction: column;    
+        margin-top: 0rem;
+      }
+}
