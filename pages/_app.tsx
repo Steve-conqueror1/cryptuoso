@@ -1,16 +1,18 @@
 import Layout from '../components/shared/Layout';
-import {ApolloProvider} from '@apollo/client'
-import {client} from './../lib/apolloClient'
+import { createApolloClient } from './../lib/apolloClient';
+import {ApolloProvider} from '@apollo/client';
 import '../styles/globals.css'
 
 function MyApp({ Component, pageProps }) {
-  return (
 
+  const client = createApolloClient();
+
+  return (
     <ApolloProvider client={client}>
       <Layout>   
         <Component {...pageProps} />
       </Layout>  
-    </ApolloProvider>
+    </ApolloProvider>  
   )
 }
 

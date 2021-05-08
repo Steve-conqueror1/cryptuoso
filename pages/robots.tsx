@@ -1,20 +1,22 @@
 import {PageHeader} from '../components/shared/PageHeader';
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import robotsStyles from './../styles/Robots.module.scss';
 import Link from "next/link";
-import { LOAD_ROBOTS } from './../lib/queries/getAllRobots';
-import { gql, useQuery} from '@apollo/client';
-import {client} from './../lib/apolloClient'
+import {getQuery}  from './../lib/queries/getAllRobots';
+
+import {createApolloClient} from './../lib/apolloClient'
 
 
+import { gql } from "@apollo/client";
 
 
+export const getServerSideProps = async () => {
+   const client = createApolloClient();
 
-export const getStaticProps = async () => {
-    const { data, error, loading } = await client.query({
+    const result = await client.query({
       query: gql`
         query Robots {
-          robots(limit:10) {
+          robots {
             id
             code            
           }
@@ -24,30 +26,34 @@ export const getStaticProps = async () => {
 
     return {
       props: {        
-        data:data
+        result
       },
    };
 }
 
 
+const RobotsList = ({result}) => {  
 
-
-
-const RobotsList = ({data}) => {   
-
-
-    const {robots} = data;
+    const {error, data, loading} = result;
+    
+   const { robots } = data
+   
   
-    const handleOnClick = () => {
-         
+
+ 
+    const [numberOfRobots, setNumberOfRobots] = useState(10)
+
+   
+    const handleFetchNext = () => {
+        setNumberOfRobots(numberOfRobots+10)
     }
 
-    // useEffect(() => {
-    //     console.log("data....", data)
-    // }, [data])
+    const handleFetchPrevious = () => {
+        setNumberOfRobots(numberOfRobots-10)
+    }
 
-
-
+    const dataLength = robots.length;
+   
 
 
     return (    
@@ -57,8 +63,10 @@ const RobotsList = ({data}) => {
             </PageHeader>           
             <h2 className={robotsStyles.header}>View Our Trading</h2>
             <div  className={robotsStyles.grid} >
+           
             {
-                robots.map((robot, index) => {
+
+                robots.slice(numberOfRobots-10, numberOfRobots).map((robot, index) => {
                     const urlPath = `/robots/robot/${robot.id}`
 
                     return(                 
@@ -82,12 +90,14 @@ const RobotsList = ({data}) => {
                 })
             }           
             </div>
-            <div onClick={handleOnClick} className={robotsStyles.pagination}>
-                <div>Load more &#8594;</div>                
+            <div  className={robotsStyles.pagination}>
+                  {numberOfRobots <= 10? null: <div  onClick={handleFetchPrevious}> &#8592;Previous</div>}  {dataLength - numberOfRobots > 10? <div onClick={handleFetchNext}>Next &#8594;</div>:null}                
             </div>
             </>
     )
 }
+
+
 
 export default RobotsList;
 

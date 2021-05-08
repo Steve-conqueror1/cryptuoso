@@ -1,0 +1,11 @@
+
+$color-grey: rgb(99, 98, 98);
+$color-green:rgba(85, 239, 196,1.0);
+
+.input {
+    padding: .4rem;  
+    border: 1px solid $color-green;
+    color: $color-grey;
+    font-size: 1.4rem;    
+}
+

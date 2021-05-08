@@ -1,0 +1,41 @@
+$color-green:rgba(85, 239, 196,1.0);
+
+
+.hero{
+    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("./../public/hero.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 4rem;
+    height: 100vh;
+    width: 100vw;
+    margin-top: -9rem;
+
+    & .header {
+        color:#fff;
+        font-size: 2.8rem;
+        text-transform: uppercase;
+        text-align: center;
+      } 
+
+    & a {
+        color: $color-green;
+        font-size: 2rem;
+        display: flex;
+        justify-content: center;
+        transition: all .2s;
+
+        &:hover{
+            color: rgb(78, 131, 116);
+        }
+    }   
+}
+
+ 
+
+.home {
+    color:#fff;
+    font-size: 1.2rem;
+    text-align: center;
+    line-height: 2rem;
+}
